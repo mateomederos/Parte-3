@@ -1,31 +1,42 @@
-//---------------------------------------------------------------------------------
-// <copyright file="AllInOnePrinter.cs" company="Universidad Católica del Uruguay">
-// Copyright (c) Programación II. Derechos reservados.
-// </copyright>
-//---------------------------------------------------------------------------------
 using System;
 using System.IO;
 
 namespace Full_GRASP_And_SOLID.Library
 {
-    public enum Destination
+    public interface IPrinterStrategy
     {
-        Console,
-        File
+        void Print(string text);
+    }
+
+    public class ConsolePrinterStrategy : IPrinterStrategy
+    {
+        public void Print(string text)
+        {
+            Console.WriteLine(text);
+        }
+    }
+
+    public class FilePrinterStrategy : IPrinterStrategy
+    {
+        public void Print(string text)
+        {
+            File.WriteAllText("Recipe.txt", text);
+        }
     }
 
     public class AllInOnePrinter
     {
-        public void PrintRecipe(Recipe recipe, Destination destination)
+        private IPrinterStrategy printerStrategy;
+
+        public AllInOnePrinter(IPrinterStrategy printerStrategy)
         {
-            if (destination == Destination.Console)
-            {
-                Console.WriteLine(recipe.GetTextToPrint());
-            }
-            else
-            {
-                File.WriteAllText("Recipe.txt", recipe.GetTextToPrint());
-            }
+            this.printerStrategy = printerStrategy;
+        }
+
+        public void PrintRecipe(Recipe recipe)
+        {
+            string textToPrint = recipe.GetTextToPrint();
+            printerStrategy.Print(textToPrint);
         }
     }
 }

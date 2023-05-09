@@ -26,9 +26,12 @@ namespace Full_GRASP_And_SOLID
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
 
-            AllInOnePrinter printer = new AllInOnePrinter();
-            printer.PrintRecipe(recipe, Destination.Console);
-            printer.PrintRecipe(recipe, Destination.File);
+            ConsolePrinterStrategy PrintInConsole = new ConsolePrinterStrategy();
+            FilePrinterStrategy PrintInFile = new FilePrinterStrategy();
+
+            // le paso como argumento uno de los dos objetos (con cualquiera de los dos va a funcionar, ya que ambos implementan la misma interfaz requerida.)
+            AllInOnePrinter printer = new AllInOnePrinter(PrintInConsole);
+            printer.PrintRecipe(recipe);
         }
 
         private static void PopulateCatalogs()
