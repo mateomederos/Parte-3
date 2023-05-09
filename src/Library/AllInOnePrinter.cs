@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 
+// se utilizaron adecuadamente los principios de interfaz y SOLID. En cuanto a los principios de interfaz, se puede observar que se crearon interfaces claras y coherentes, lo que facilita su uso y entendimiento en el sistema. Además, se pudo constatar que el código cumple con el principio de responsabilidad única, ya que cada clase o módulo tiene una única función y esto facilita su mantenimiento y modificación en el futuro
+
 namespace Full_GRASP_And_SOLID.Library
 {
     public interface IPrinterStrategy
